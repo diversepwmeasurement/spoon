@@ -1,21 +1,10 @@
-name: Release
-
-on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Next release version'
-        required: true
-        default: 'patch'
-        type: choice
-        options:
-          - major
-          - minor
-          - patch
-
 jobs:
   release:
+    secrets: inherit
     uses: ./.github/workflows/jreleaser.yml
     with:
       release-script-to-run: chore/release.sh ${{ github.event.inputs.version }}
-    secrets: inherit
+name: Release
+on:
+  repository_dispatch:
+    types: trigger-ga___release-manual.yml

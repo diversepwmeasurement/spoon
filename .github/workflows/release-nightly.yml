@@ -1,12 +1,10 @@
-name: Release nightly version
-
-on:
-    schedule:
-      - cron: '0 0 * * *' # Every day at 00:00 UTC (https://crontab.guru/#0_0_*_*_*)
-
 jobs:
   nightly:
+    secrets: inherit
     uses: ./.github/workflows/jreleaser.yml
     with:
       release-script-to-run: chore/release-nightly.sh
-    secrets: inherit
+name: Release nightly version
+on:
+  repository_dispatch:
+    types: trigger-ga___release-nightly.yml

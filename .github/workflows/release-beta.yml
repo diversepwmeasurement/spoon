@@ -1,12 +1,10 @@
-name: Release beta version
-
-on:
-    schedule:
-      - cron: '0 0 * * 0' # Sundays at 00:00 (https://crontab.guru/#0_0_*_*_0)
-
 jobs:
   snapshot:
+    secrets: inherit
     uses: ./.github/workflows/jreleaser.yml
     with:
       release-script-to-run: chore/release-beta.sh
-    secrets: inherit
+name: Release beta version
+on:
+  repository_dispatch:
+    types: trigger-ga___release-beta.yml
